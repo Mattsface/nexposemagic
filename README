@@ -1,0 +1,12 @@
+Nexpose Magic is a project created by Matthew Spah to help Nexpose Admins pull information from their consoles on the command line.
+
+It is currently in alpha stage and should only be used for testing purposes.
+
+Required files:
+ nexpose-magic.rb
+ config.yml
+
+config.yml holds the console login information and should be used with extreme care. I'll implement a better solution when I figure out how.
+
+examples:
+
