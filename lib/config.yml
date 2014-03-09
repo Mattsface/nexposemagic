@@ -1,8 +1,0 @@
-# Yaml structure for nexpose-magic
-# ---
-# - name: [console name]
-#   ip: [ip address of console]
-#   password: [password]
-#   user: [username]
-
----

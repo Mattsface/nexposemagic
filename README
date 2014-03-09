@@ -8,5 +8,26 @@ Required files:
 
 config.yml holds the console login information and should be used with extreme care. I'll implement a better solution when I figure out how.
 
-examples:
 
+To display information about a specific scan engine:
+	- nexmagic.rb -e [--engine] <engine ID>
+
+To display nexpose site information:
+	- nexmagic.rb -t [--site] <site ID>
+
+To display scans that are currently running on your nexpose console:
+	- nexmagic.rb -v [--vscans]
+
+To display a table list of either all sites or engines present on a console:
+	- nexmagic.rb -l [--list] <scans | engines>
+
+To display command line help:
+	- nexmagic.rb -h
+
+Make a Gem!
+Source on Github
+Gem Released on RubyGems.org
+Full Documentation and Tests
+OSS License of your choice
+Tested on Travis CI (Bonus: Code Climate!)
+Ready to demo the last day of class

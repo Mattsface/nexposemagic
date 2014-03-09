@@ -6,8 +6,8 @@ Gem::Specification.new do |x|
 	x.description = 'Nexpose-magic - Nexpose adminstration CLI tool'
 	x.summary = x.description
 	x.email = 'spahmatthew@gmail.com'
-	x.files = ['README', 'lib/config.yml']
+	x.files = ['README', 'lib/nexpose-magic.rb', 'nexposemagic.rspec']
 	x.bindir = 'bin'
-	x.executables = ['nexpose-magic.rb']
+	x.executables = ['nexmagic.rb']
 	x.add_dependency('nexpose')
 end

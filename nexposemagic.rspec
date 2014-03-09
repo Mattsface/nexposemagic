@@ -1,0 +1,42 @@
+require 'nexpose-magic'
+#You'll need to fill in Connection.new for this test to be successful 
+# 
+
+describe NexposeMagic do
+  
+  before(:all) do
+    @options = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD>}
+    @nexpose = NexposeMagic.new(@options)
+  end
+
+	it "should connect to the console with correct paramaters" do
+		@nexpose.connect
+	end
+
+  it "shouldn't display any information about an unknown scan engine" do
+    unknownid = #enter unknown ID
+    expect { @nexpose.populate_engine(unknownid) }.to raise_error
+  end
+
+  it "should populate engine information about a known scan engine" do
+    knownid = #enter known ID
+    @nexpose.populate_engine(12)
+  end
+
+  it "shouldn't display any information about an unknown site" do
+    unknownsite = #enter unknown site id
+    expect { @nexpose.populate_site(unknownsite) }.to raise_error
+  end
+
+  it "should populate site information about a known site" do
+    knownsite = #enter known site id
+    @nexpose.populate_site(knownsite)
+  end
+
+  it "should not connect to the console with incorrect parameters" do
+    @badoptions = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD> }
+    @nexpose2 = NexposeMagic.new(@badoptions)
+    expect { @nexpose2.connect }.to raise_error 
+  end
+
+end
