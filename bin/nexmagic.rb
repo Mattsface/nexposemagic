@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require '../lib/nexpose-magic'
+require 'nexpose-magic'
 
 options = {}
 
