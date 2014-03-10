@@ -5,7 +5,11 @@ require 'nexpose-magic'
 describe NexposeMagic do
   
   before(:all) do
-    @options = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD>}
+    @options = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD> }
+    @knownsite = # known site id
+    @knownengine = # known engine id 
+    @unknownsite = 999999
+    @unknownengine = 9999999
     @nexpose = NexposeMagic.new(@options)
   end
 
@@ -14,23 +18,19 @@ describe NexposeMagic do
 	end
 
   it "shouldn't display any information about an unknown scan engine" do
-    unknownid = #enter unknown ID
-    expect { @nexpose.populate_engine(unknownid) }.to raise_error
+    expect { @nexpose.populate_engine(@unknownengine) }.to raise_error
   end
 
   it "should populate engine information about a known scan engine" do
-    knownid = #enter known ID
-    @nexpose.populate_engine(12)
+    @nexpose.populate_engine(@knownengine)
   end
 
   it "shouldn't display any information about an unknown site" do
-    unknownsite = #enter unknown site id
-    expect { @nexpose.populate_site(unknownsite) }.to raise_error
+    expect { @nexpose.populate_site(@unknownsite) }.to raise_error
   end
 
   it "should populate site information about a known site" do
-    knownsite = #enter known site id
-    @nexpose.populate_site(knownsite)
+    @nexpose.populate_site(@knownsite)
   end
 
   it "should not connect to the console with incorrect parameters" do
