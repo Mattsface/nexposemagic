@@ -6,7 +6,7 @@ Required files:
  nexpose-magic.rb
  nexmagic.rb
 
-Nexpose Magic uses the arugments supplied by -u, -p, and -i to make the connection the the nexpose console
+Nexpose Magic uses the arugments supplied by -u (--user), -p (--password), -i (--ip), -t (--port) to make the connection the the nexpose console. If no port is supplied, then the default nexpose port 3780 will be used.
 
 To display information about a specific scan engine:
 	- nexmagic.rb -i 192.168.1.128 -u nexposeuser -p password -e [--engine] <engine ID>

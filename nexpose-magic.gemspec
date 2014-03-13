@@ -1,8 +1,8 @@
 Gem::Specification.new do |x|
 	x.name = "nexpose-magic"
-	x.version = "0.0.1"
+	x.version = "0.0.2"
 	x.authors = ["Matthew Spah"]
-	x.date = %q{2014-03-04}
+	x.date = %q{2014-03-13}
 	x.description = 'Nexpose-magic - Nexpose adminstration CLI tool'
 	x.summary = x.description
 	x.email = 'spahmatthew@gmail.com'
