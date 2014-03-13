@@ -8,32 +8,32 @@ include Nexpose
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: nexpose-magic.rb -c [console] [options]"
+  opts.banner = "Usage: nexpose-magic.rb -i [console ip address] -u [user] -p [password] [ -t [port]] [ options ]"
 
   opts.separator ""
   opts.separator "Specific options:"
 
-  opts.on('-i', "--ip <IP ADDRESS>", "Nexpose Console IP") do |i|
+  opts.on('-i', "--ip [ip address]", "Nexpose Console IP") do |i|
     options[:ip] = i
   end
 
-  opts.on('-u', "--user <User>", "Nexpose Console User") do |u|
+  opts.on('-u', "--user [username]", "Nexpose Console User") do |u|
     options[:user] = u
   end
 
-  opts.on('-p', "--password <Password>", "Nexpose Console Password") do |p|
+  opts.on('-p', "--password [password]", "Nexpose Console Password") do |p|
     options[:password] = p
   end
 
-  opts.on('-t', "--port <Port Number>", "Nexpose Port Number") do |t|
+  opts.on('-t', "--port [port number]", "Nexpose Port Number") do |t|
     options[:port] = t
   end
 
-  opts.on("-e", "--engine <Engine ID>", "Display Scan Engine Information") do |e|
+  opts.on("-e", "--engine [engine ID]", "Display Scan Engine Information") do |e|
     options[:scan_engine] = e
   end
 
-  opts.on("-s", "--site <site ID>", "Display Site Information") do |s|
+  opts.on("-s", "--site [site ID]", "Display Site Information") do |s|
     options[:site] = s
   end
 
@@ -41,7 +41,7 @@ OptionParser.new do |opts|
     options[:scans] = v
   end
 
-  opts.on("-l", "--list [sites] [engines]", "Display tabled list of all Nexpose Sites, or Scan Engines present on a console") do |l|
+  opts.on("-l", "--list [sites | engines]", "Display tabled list of all Nexpose Sites, or Scan Engines present on a console") do |l|
     options[:list] = l 
   end
 
