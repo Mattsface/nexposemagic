@@ -8,7 +8,6 @@ describe NexposeMagic do
     @nexpose = NexposeMagic.new 
   end
 
-  
   it "should populate engine information about a known scan engine" do
     sites = []
     stub_site = stub :id => "234234", :name => "This is a test site"
@@ -26,5 +25,20 @@ describe NexposeMagic do
     stub_site = stub :name => "This is a test site", :engine => "CFS-LH-2000", :scan_template_name => "Template PCI", :assets => assets
     @nexpose.site = stub_site
     @nexpose.populate_site.should include("Site Name: This is a test site")
+  end
+
+  it "should let you know when no scans are running" do
+    stub_scans = []
+    @nexpose.scans = stub_scans
+    @nexpose.populate_scans.should include("No scans currently running")
+  end
+
+  it "should display scans when they are running" do
+    stub_scans = []
+    stub_nodes = stub :live => "46"
+    stub_scan = stub :scan_id => "32434", :site_id => "343434", :status => "running", :engine_id => "99", :start_time => "03/02/2014 12:34:54", :nodes => stub_nodes
+    stub_scans << stub_scan
+    @nexpose.scans = stub_scans 
+    @nexpose.populate_scans.should include("Scan ID: 32434")
   end
 end

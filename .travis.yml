@@ -1,6 +1,8 @@
 language: ruby
 rvm:
   - 2.1.0
+before_install: gem build nexpose-magic.gemspec
+before_install: gem install nexpose-magic-0.0.1.gem
 install: gem install nexpose
 install: gem install table_print
 install: gem install rspec

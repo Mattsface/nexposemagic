@@ -43,7 +43,7 @@ class NexposeMagic
   end
 
   def populate_scans
-    return ["No scans currently running"] if not @scans.nil?
+    return ["No scans currently running"] if @scans.empty?
 
     @scaninfo = [ "Scans currently runnning"]
     @scans.each do |x|
