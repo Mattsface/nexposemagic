@@ -9,6 +9,6 @@ Gem::Specification.new do |x|
 	x.files = ['README', 'lib/nexpose-magic.rb', 'nexposemagic.rspec']
 	x.bindir = 'bin'
 	x.executables = ['nexmagic.rb']
-	x.add_development_dependency('nexpose')
-	x.add_development_dependency("table_print")
+	x.add_dependency('nexpose')
+	x.add_dependency("table_print")
 end

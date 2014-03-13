@@ -25,6 +25,10 @@ OptionParser.new do |opts|
     options[:password] = p
   end
 
+  opts.on('-t', "--port <Port Number>", "Nexpose Port Number") do |t|
+    options[:port] = t
+  end
+
   opts.on("-e", "--engine <Engine ID>", "Display Scan Engine Information") do |e|
     options[:scan_engine] = e
   end
@@ -48,7 +52,8 @@ OptionParser.new do |opts|
 end.parse!
 
 begin
-  nsc = Connection.new(options[:ip], options[:user], options[:password])
+  nsc = Connection.new(options[:ip], options[:user], options[:password]) if options[:port].nil?
+  nsc = Connection.new(options[:ip], options[:user], options[:password], port = options[:port]) if options[:port]
   nsc.login
 rescue => e 
   raise e
