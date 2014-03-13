@@ -5,4 +5,4 @@ install: gem install nexpose
 install: gem install table_print
 install: gem install rspec
 
-script: rspec
+script: rspec nexposemagic.rspec
