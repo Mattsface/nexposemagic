@@ -2,4 +2,6 @@ language: ruby
 rvm:
   - 2.1.0
 install: gem install nexpose
+install: gem install table_print
 
+script: rspec

@@ -3,40 +3,28 @@ require 'nexpose-magic'
 # 
 
 describe NexposeMagic do
+
+  before :each do
+    @nexpose = NexposeMagic.new 
+  end
+
   
-  before(:all) do
-    @options = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD> }
-    @knownsite = # known site id
-    @knownengine = # known engine id 
-    @unknownsite = 999999
-    @unknownengine = 9999999
-    @nexpose = NexposeMagic.new(@options)
-  end
-
-	it "should connect to the console with correct paramaters" do
-		@nexpose.connect
-	end
-
-  it "shouldn't display any information about an unknown scan engine" do
-    expect { @nexpose.populate_engine(@unknownengine) }.to raise_error
-  end
-
   it "should populate engine information about a known scan engine" do
-    @nexpose.populate_engine(@knownengine)
-  end
-
-  it "shouldn't display any information about an unknown site" do
-    expect { @nexpose.populate_site(@unknownsite) }.to raise_error
+    sites = []
+    stub_site = stub :id => "234234", :name => "This is a test site"
+    sites << stub_site
+    stub_engine = stub :name => "CFS-LH-2000", :id => "99", :address => "192.168.1.25", :sites => sites
+    @nexpose.engine = stub_engine
+    @nexpose.populate_engine.should include("Engine Name: CFS-LH-2000")
+    @nexpose.populate_engine.should include("Engine Address: 192.168.1.25")
   end
 
   it "should populate site information about a known site" do
-    @nexpose.populate_site(@knownsite)
+    assets = []
+    stub_asset = stub :from => "192.168.1.1", :to => "192.168.1.254"
+    assets << stub_asset
+    stub_site = stub :name => "This is a test site", :engine => "CFS-LH-2000", :scan_template_name => "Template PCI", :assets => assets
+    @nexpose.site = stub_site
+    @nexpose.populate_site.should include("Site Name: This is a test site")
   end
-
-  it "should not connect to the console with incorrect parameters" do
-    @badoptions = { ip: <IP ADDRESS>, user: <USERNAME>, password: <PASSWORD> }
-    @nexpose2 = NexposeMagic.new(@badoptions)
-    expect { @nexpose2.connect }.to raise_error 
-  end
-
 end

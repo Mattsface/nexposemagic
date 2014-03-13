@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 require 'nexpose-magic'
+require 'optparse'
+require 'nexpose'
+require 'table_print'
+include Nexpose
 
 options = {}
 
@@ -43,26 +47,41 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-nexpose = NexposeMagic.new(options)
-nexpose.connect
+begin
+  nsc = Connection.new(options[:ip], options[:user], options[:password])
+  nsc.login
+rescue => e 
+  raise e
+end  
+
+nexpose = NexposeMagic.new
 
 if not options[:scan_engine].nil?
-  nexpose.populate_engine(options[:scan_engine])
-  nexpose.display_engine
+  nexpose.engine = Engine.load(nsc, options[:scan_engine]) 
+  nexpose.populate_engine.each { |x| puts x }
+
 elsif not options[:site].nil?
-  nexpose.populate_site(options[:site])
-  nexpose.display_site
+  nexpose.site = Site.load(nsc, options[:site])
+  nexpose.populate_site.each {|x| puts x }
+
 elsif not options[:list].nil?
-  nexpose.list(options[:list])
+  case options[:list]
+    when "engines"
+      nexpose.engines = nsc.list_engines
+      nexpose.list_engines
+    when "sites"
+      nexpose.sites = nsc.list_sites
+      nexpose.list_sites
+    else
+      puts "You gave an invalid list argument"
+  end
+
 elsif not options[:scans].nil?
-  nexpose.display_scans
+  nexpose.scans = nsc.scan_activity
+  nexpose.populate_scans.each { |x| puts x }
 end
 
-nexpose.logout
-
-
-
-
+nsc.logout
 
 
 
